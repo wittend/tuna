@@ -30,7 +30,7 @@ Usage
 Start by creating a new Tuna object like so:
 
 <pre>
-var context = new webkitAudioContext();
+var context = new AudioContext();
 var tuna = new Tuna(context);
 </pre>
 
@@ -72,14 +72,14 @@ var chorus = new tuna.Chorus({
              });
 </pre>
 
-A delay effect with feedback and a highpass filter applied to the delayed signal.
+A delay effect with feedback and a lowpass filter applied to the delayed signal.
 <pre>
 var delay = new tuna.Delay({
                 feedback: 0.45,    //0 to 1+
                 delayTime: 150,    //how many milliseconds should the wet signal be delayed? 
                 wetLevel: 0.25,    //0 to 1+
                 dryLevel: 1,       //0 to 1+
-                cutoff: 20,        //cutoff frequency of the built in highpass-filter. 20 to 22050
+                cutoff: 2000,      //cutoff frequency of the built in lowpass-filter. 20 to 22050
                 bypass: 0
             });
 </pre>
@@ -121,7 +121,7 @@ var compressor = new tuna.Compressor({
                  });
 </pre>
 
-A convolver with high- and lowcut. You can find a lot of impulse resonses <a href="http://chromium.googlecode.com/svn/trunk/samples/audio/impulse-responses/">here</a>
+A convolver with high- and lowcut. You can find a lot of impulse resonses <a href="http://chromium.googlecode.com/svn/trunk/samples/audio/impulse-responses/">here</a>, or by searching for "free impulse response files".
 <pre>
 var convolver = new tuna.Convolver({
                     highCut: 22050,                         //20 to 22050
@@ -140,7 +140,6 @@ var filter = new tuna.Filter({
                  frequency: 20,         //20 to 22050
                  Q: 1,                  //0.001 to 100
                  gain: 0,               //-40 to 40
-                 bypass: 1,             //0 to 1+
                  filterType: 0,         //0 to 7, corresponds to the filter types in the native filter node: lowpass, highpass, bandpass, lowshelf, highshelf, peaking, notch, allpass in that order
                  bypass: 0
              });
